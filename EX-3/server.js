@@ -1,5 +1,7 @@
 // server.js
 const http = require('http');
+const querystring = require('querystring');
+const fs = require('fs');
 
 const server = http.createServer((req, res) => {
     const url = req.url;
@@ -25,6 +27,23 @@ const server = http.createServer((req, res) => {
 
     if (url === '/contact' && method === 'POST') {
         // Implement form submission handling
+        let body = '';
+
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+
+        req.on('end', () => {
+            const parsedData = querystring.parse(body);
+            const name = parsedData.name;
+            console.log('Submitted Name:', name);
+
+            fs.appendFile('submissions.txt', name + '\n', err => {
+                res.writeHead(200, {'Content-Type': 'text/plain'});
+                res.end("Submitted Sucessfully!");
+            });
+        });
+        return;
     }
 
     else {
