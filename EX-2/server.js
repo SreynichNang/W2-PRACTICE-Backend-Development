@@ -20,7 +20,8 @@ const server = http.createServer((req, res) => {
         `);
     }
     // Implement more routes here
-    else if (url === '/about' && method === 'GET') {
+    if (url === '/about' && method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         return res.end(`
             <html>
                 <head><title>About</title></head>
@@ -31,6 +32,7 @@ const server = http.createServer((req, res) => {
         `);
     }
     else if (url === '/contact-us' && method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         return res.end(`
             <html>
                 <head><title>Contact us</title></head>
@@ -41,6 +43,7 @@ const server = http.createServer((req, res) => {
         `);
     }
     else if (url === '/products' && method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         return res.end(`
             <html>
                 <head><title>Product</title></head>
@@ -51,6 +54,7 @@ const server = http.createServer((req, res) => {
         `);
     }
     else if (url === '/projects' && method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         return res.end(`
             <html>
                 <head><title>Project</title></head>
